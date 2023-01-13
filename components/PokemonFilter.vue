@@ -2,7 +2,7 @@
 import { FilterOperator } from '@/types/Filter';
 import { Filter } from '@/types/Filter';
 
-const pokemons = usePokemonList();
+const pokemons = usePokemonList().list;
 interface Operator {
   filterKey: string,
   value: FilterOperator
@@ -13,7 +13,7 @@ let editingOperators: Operator[] = [
   { filterKey: 'speed', value: FilterOperator.GreaterThanOrEquals },
   { filterKey: 'hp', value: FilterOperator.GreaterThanOrEquals }
 ];
-const filterSettings = usePokemonFilter();
+const filterSettings = usePokemonFilter().settings;
 const operators = [
   { key: FilterOperator.GreaterThanOrEquals , value: '>='},
   { key: FilterOperator.LessThanOrEquals , value: '<='},
@@ -24,7 +24,8 @@ const filterValueChange = (key: string, event: any) => {
   const found = !!setting;
   if(!found) {
     setting = { key } as Filter;
-    filterSettings.value.push(setting);
+    // filterSettings.value.push(setting);
+    filterSettings.push(setting);
   }
   switch(key) {
     case 'name':
@@ -33,7 +34,9 @@ const filterValueChange = (key: string, event: any) => {
         setting.operator = FilterOperator.Contains
         setting.value = event.target.value;
       } else if(found) {
-        filterSettings.value = filterSettings.value.filter(s => s.key !== key);
+        // filterSettings.value = filterSettings.value.filter(s => s.key !== key);
+        filterSettings.length = 0;
+        filterSettings.push(...filterSettings.filter(s => s.key !== key));
       }
       break;
     case 'attack':
@@ -44,7 +47,9 @@ const filterValueChange = (key: string, event: any) => {
         setting.operator = editingOperators.find(o => o.filterKey === key).value;
         setting.value = parseInt(event.target.value);
       } else if(found) {
-        filterSettings.value = filterSettings.value.filter(s => s.key !== key);
+        // filterSettings.value = filterSettings.value.filter(s => s.key !== key);
+        filterSettings.length = 0;
+        filterSettings.push(...filterSettings.filter(s => s.key !== key));
       }
       break;
     case 'classfication':
@@ -52,14 +57,16 @@ const filterValueChange = (key: string, event: any) => {
         setting.operator = FilterOperator.Equals;
         setting.value = event.target.value;
       } else if(found) {
-        filterSettings.value = filterSettings.value.filter(s => s.key !== key);
+        filterSettings.length = 0;
+        filterSettings.push(...filterSettings.filter(s => s.key !== key));
       }
       break;
     case 'is_legendary':
       break;
   }
 }
-const filter =  (key: string) => filterSettings.value.find(s => s.key === key);
+// const filter =  (key: string) => filterSettings.value.find(s => s.key === key);
+const filter =  (key: string) => filterSettings.find(s => s.key === key);
 const filterOperator = (key: string) => filter(key)?.operator;
 const filterValue = (key: string) => filter(key)?.value;
 const filterOperatorChange = (key:string, event: any) => {
@@ -77,7 +84,8 @@ const filterOperatorChange = (key:string, event: any) => {
   }
 };
 const classifications = [''];
-classifications.push(...[...new Set(pokemons.value.map(p => p.classfication))]);
+// classifications.push(...[...new Set(pokemons.value.map(p => p.classfication))]);
+classifications.push(...[...new Set(pokemons.map(p => p.classfication))]);
 classifications.sort((a, b) => a > b ? 1 : -1);
 </script>
 

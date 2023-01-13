@@ -5,9 +5,11 @@ import { Pokemon } from './types/Pokemon';
 // const data = await import('~/data/pokemon.json');
 const { data } = await useFetch('/pokemons');
 const pokemons = usePokemonList();
-pokemons.value.length = 0;
+// pokemons.value.length = 0;
+pokemons.list.length = 0;
 // pokemons.value.push(...(data.default as Pokemon[]));
-pokemons.value.push(...(data.value.default as Pokemon[]));
+// pokemons.value.push(...(data.value.default as Pokemon[]));
+pokemons.list.push(...(data.value.default as Pokemon[]));
 </script>
 
 <template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
-const pokemon = usePokemonList().value.find(p => p.pokedex_number === parseInt(route.params.id as string));
+// const pokemon = usePokemonList().value.find(p => p.pokedex_number === parseInt(route.params.id as string));
+const pokemon = usePokemonList().list.find(p => p.pokedex_number === parseInt(route.params.id as string));
 </script>
 
 <template>

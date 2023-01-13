@@ -3,8 +3,10 @@ import { FilterOperator } from '@/types/Filter';
 
 const filterSettings = usePokemonFilter();
 const pokemons = usePokemonList();
-const filteredPokemons = computed(() => pokemons.value.filter((p) =>{
-  for(const filter of filterSettings.value) {
+// const filteredPokemons = computed(() => pokemons.value.filter((p) =>{
+//   for(const filter of filterSettings.value) {
+const filteredPokemons = computed(() => pokemons.list.filter((p) =>{
+  for(const filter of filterSettings.settings) {
     switch(filter.operator) {
       case FilterOperator.Contains:
         if(!p[filter.key].toLowerCase().includes(filter.value.toLowerCase())) { return false; } 

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const auth = useAuth();
 const logout = () => {
-  auth.value.isLoggedIn = false;
+  // auth.value.isLoggedIn = false;
+  auth.isLoggedIn = false;
 }
 </script>
 

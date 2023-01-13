@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from '@/composables/states';
+// import { useAuth } from '@/composables/states';
 
 const loading = ref(false);
 const auth = useAuth();
@@ -17,8 +17,10 @@ const login = async () => {
   if(response.error.value) {
     return;
   }
-  auth.value.isLoggedIn = true;
-  auth.value.token = (response.data.value as any).token;
+  // auth.value.isLoggedIn = true;
+  // auth.value.token = (response.data.value as any).token;
+  auth.isLoggedIn = true;
+  auth.token = (response.data.value as any).token;
   navigateTo('/');
 }
 </script>

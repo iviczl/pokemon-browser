@@ -143,5 +143,7 @@ classifications.sort((a, b) => a > b ? 1 : -1);
   flex-direction: row;
   gap: 1em;
   /* justify-content: ; */
-  height: 1.5rem;}
+  /* height: 1.5rem; */
+  flex-wrap: wrap;
+}
 </style>

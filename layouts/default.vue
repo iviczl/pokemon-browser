@@ -44,6 +44,8 @@ a {
 }
 .menu-item {
   display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
   align-self: flex-end;
 }
 </style>
